@@ -12,7 +12,7 @@ tl_2016_all_sldu.shp: tl_2016_01_sldu.zip tl_2016_02_sldu.zip tl_2016_04_sldu.zi
                       tl_2016_42_sldu.zip tl_2016_44_sldu.zip tl_2016_45_sldu.zip tl_2016_46_sldu.zip \
                       tl_2016_47_sldu.zip tl_2016_48_sldu.zip tl_2016_49_sldu.zip tl_2016_50_sldu.zip \
                       tl_2016_51_sldu.zip tl_2016_53_sldu.zip tl_2016_54_sldu.zip tl_2016_55_sldu.zip \
-                      tl_2016_56_sldu.zip tl_2016_72_sldu.zip
+                      tl_2016_56_sldu.zip tl_2016_72_sldu.zip tl_2016_11_sldu.zip tl_2016_31_sldu.zip
 	./merge-slds.sh sldu
 
 tl_2016_all_sldl.shp: tl_2016_01_sldl.zip tl_2016_02_sldl.zip tl_2016_04_sldl.zip tl_2016_05_sldl.zip \

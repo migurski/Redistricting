@@ -21,58 +21,92 @@ out_lyr.CreateField(ogr.FieldDefn('uscd_geoid', ogr.OFTString))
 # Iterate over every U.S. state separately by FIPS code.
 fips_codes = {feat.GetField('STATEFP') for feat in us_cd115_lyr}
 
+def get_polygon_geometries(geometry):
+    '''
+    '''
+    if geometry.GetGeometryType() == ogr.wkbPolygon:
+        return [geometry]
+    elif geometry.GetGeometryType() in (ogr.wkbMultiPolygon, ogr.wkbGeometryCollection):
+        return [geom for geom in geometry if geom.GetGeometryType() == ogr.wkbPolygon]
+    else:
+        return []
+
+def add_new_feature(layer, geometry, sldu_geoid, sldl_geoid, uscd_geoid):
+    '''
+    '''
+    print(index, uscd_geoid, sldu_geoid, sldl_geoid, file=sys.stderr)
+
+    feature = ogr.Feature(layer.GetLayerDefn())
+    feature.SetGeometry(geometry)
+    feature.SetField('sldu_geoid', sldu_geoid)
+    feature.SetField('sldl_geoid', sldl_geoid)
+    feature.SetField('uscd_geoid', uscd_geoid)
+    layer.CreateFeature(feature)
+
 for fips_code in sorted(fips_codes):
-    # Isolate feature for this one U.S. state.
+    # Isolate features for this one U.S. state.
     all_sldu_fs = [feat for feat in all_sldu_lyr if feat.GetField('STATEFP') == fips_code]
     all_sldl_fs = [feat for feat in all_sldl_lyr if feat.GetField('STATEFP') == fips_code]
     us_cd115_fs = [feat for feat in us_cd115_lyr if feat.GetField('STATEFP') == fips_code]
+    
+    if not all_sldl_fs:
+        # Nebraska and D.C. have only an upper house defined:
+        # http://www.census.gov/geo/reference/gtc/gtc_sld.html
+        all_sldl_fs = [None]
     
     product = itertools.product(all_sldu_fs, all_sldl_fs, us_cd115_fs)
     
     # Iterate over all possible district combinations.
     for (all_sldu_feat, all_sldl_feat, us_cd115_feat) in product:
-        all_sldu_geom = all_sldu_feat.GetGeometryRef()
-        all_sldl_geom = all_sldl_feat.GetGeometryRef()
-        us_cd115_geom = us_cd115_feat.GetGeometryRef()
+        if all_sldl_feat is None:
+            # Nebraska and D.C. have only an upper house defined.
+            all_sldu_geom = all_sldu_feat.GetGeometryRef()
+            us_cd115_geom = us_cd115_feat.GetGeometryRef()
         
-        # Pass if any pair of geometries does not intersect
-        if all_sldu_geom.Disjoint(all_sldl_geom):
-            continue
-        if all_sldl_geom.Disjoint(us_cd115_geom):
-            continue
-        if us_cd115_geom.Disjoint(all_sldu_geom):
-            continue
-        if all_sldu_geom.Touches(all_sldl_geom):
-            continue
-        if all_sldl_geom.Touches(us_cd115_geom):
-            continue
-        if us_cd115_geom.Touches(all_sldu_geom):
-            continue
+            # Pass if this pair of geometries does not intersect
+            if us_cd115_geom.Disjoint(all_sldu_geom):
+                continue
+            if us_cd115_geom.Touches(all_sldu_geom):
+                continue
         
-        # Calculate the intersection, and collect any polygonal areas.
-        intersection = all_sldu_geom.Intersection(all_sldl_geom.Intersection(us_cd115_geom))
+            # Calculate the intersection, and collect any polygonal areas.
+            intersection = all_sldu_geom.Intersection(us_cd115_geom)
+            geoms = get_polygon_geometries(intersection)
         
-        if intersection.GetGeometryType() == ogr.wkbPolygon:
-            geoms = [intersection]
-        elif intersection.GetGeometryType() in (ogr.wkbMultiPolygon, ogr.wkbGeometryCollection):
-            geoms = [geom for geom in intersection if geom.GetGeometryType() == ogr.wkbPolygon]
+            # Write a new feature for each polygon found.
+            for (index, geom) in enumerate(geoms):
+                sldu_geoid = all_sldu_feat.GetField('GEOID')
+                uscd_geoid = us_cd115_feat.GetField('GEOID')
+                add_new_feature(out_lyr, geom, sldu_geoid, '', uscd_geoid)
         else:
-            geoms = []
+            all_sldu_geom = all_sldu_feat.GetGeometryRef()
+            all_sldl_geom = all_sldl_feat.GetGeometryRef()
+            us_cd115_geom = us_cd115_feat.GetGeometryRef()
         
-        # Write a new feature for each polygon found.
-        for (index, geom) in enumerate(geoms):
-            sldu_geoid = all_sldu_feat.GetField('GEOID')
-            sldl_geoid = all_sldl_feat.GetField('GEOID')
-            uscd_geoid = us_cd115_feat.GetField('GEOID')
+            # Pass if any pair of geometries does not intersect
+            if all_sldu_geom.Disjoint(all_sldl_geom):
+                continue
+            if all_sldl_geom.Disjoint(us_cd115_geom):
+                continue
+            if us_cd115_geom.Disjoint(all_sldu_geom):
+                continue
+            if all_sldu_geom.Touches(all_sldl_geom):
+                continue
+            if all_sldl_geom.Touches(us_cd115_geom):
+                continue
+            if us_cd115_geom.Touches(all_sldu_geom):
+                continue
         
-            print(index, sldu_geoid, sldl_geoid, uscd_geoid, file=sys.stderr)
+            # Calculate the intersection, and collect any polygonal areas.
+            intersection = all_sldu_geom.Intersection(all_sldl_geom.Intersection(us_cd115_geom))
+            geoms = get_polygon_geometries(intersection)
         
-            out_feat = ogr.Feature(out_lyr.GetLayerDefn())
-            out_feat.SetGeometry(geom)
-            out_feat.SetField('sldu_geoid', sldu_geoid)
-            out_feat.SetField('sldl_geoid', sldl_geoid)
-            out_feat.SetField('uscd_geoid', uscd_geoid)
-            out_lyr.CreateFeature(out_feat)
+            # Write a new feature for each polygon found.
+            for (index, geom) in enumerate(geoms):
+                sldu_geoid = all_sldu_feat.GetField('GEOID')
+                sldl_geoid = all_sldl_feat.GetField('GEOID')
+                uscd_geoid = us_cd115_feat.GetField('GEOID')
+                add_new_feature(out_lyr, geom, sldu_geoid, sldl_geoid, uscd_geoid)
 
 print(out_path, file=sys.stdout)
 out_ds.Destroy()
