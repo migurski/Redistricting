@@ -1,0 +1,117 @@
+year,geoid,office,party abbr,party name,candidate,votes,percentage
+2016,06,President,DEM,,Hillary Clinton,8753788,61.7
+2016,06,President,"REP, AI",,Donald J. Trump,4483810,31.6
+2016,06,President,LIB,,Gary Johnson,478500,3.4
+2016,06,President,GRN,,Jill Stein,278657,2.0
+2016,06,President,(W/I),,"Bernard ""Bernie"" Sanders",79341,0.6
+2016,06,President,PF,,Gloria Estela La Riva,66101,0.5
+2016,06,President,(W/I),,Evan McMullin,39596,0.3
+2016,06,President,(W/I),,Mike Maturen,1316,0.0
+2016,06,President,(W/I),,Laurence Kotlikoff,402,0.0
+2016,06,President,(W/I),,Jerry White,84,0.0
+2016,0601,United States Representative District 1,REP,,Doug La Malfa,185448,59.1
+2016,0601,United States Representative District 1,DEM,,Jim Reed,128588,40.9
+2016,0602,United States Representative District 2,DEM,,Jared W. Huffman,254194,76.9
+2016,0602,United States Representative District 2,REP,,Dale K. Mensing,76572,23.1
+2016,0603,United States Representative District 3,DEM,,John Garamendi,152513,59.4
+2016,0603,United States Representative District 3,REP,,N Eugene Cleek,104453,40.6
+2016,0604,United States Representative District 4,REP,,Tom McClintock,220133,62.7
+2016,0604,United States Representative District 4,DEM,,Robert W. Derlet,130845,37.3
+2016,0605,United States Representative District 5,DEM,,Mike Thompson,224526,76.9
+2016,0605,United States Representative District 5,REP,,Carlos Santamaria,67565,23.1
+2016,0606,United States Representative District 6,DEM,,Doris Matsui,177565,75.4
+2016,0606,United States Representative District 6,REP,,Robert (Bob) Evans,57848,24.6
+2016,0607,United States Representative District 7,DEM,,Ami Bera,152133,51.2
+2016,0607,United States Representative District 7,REP,,Scott R. Jones,145168,48.8
+2016,0608,United States Representative District 8,REP,,Paul Cook,136972,62.3
+2016,0608,United States Representative District 8,DEM,,Rita Ramirez,83035,37.7
+2016,0609,United States Representative District 9,DEM,,Jerry McNerney,133163,57.4
+2016,0609,United States Representative District 9,REP,,"Antonio C. ""Tony"" Amador",98992,42.6
+2016,0623,United States Representative District 23,REP,,Kevin McCarthy,167116,69.2
+2016,0623,United States Representative District 23,DEM,,Wendy Reed,74468,30.8
+2016,0624,United States Representative District 24,DEM,,Salud Carbajal,166034,53.4
+2016,0624,United States Representative District 24,REP,,Justin Donald Fareed,144780,46.6
+2016,0625,United States Representative District 25,REP,,Steve Knight,138755,53.1
+2016,0625,United States Representative District 25,DEM,,Bryan Caforio,122406,46.9
+2016,0626,United States Representative District 26,DEM,,Julia Brownley,169248,60.4
+2016,0626,United States Representative District 26,REP,,Rafael A. Dagnesses,111059,39.6
+2016,0627,United States Representative District 27,DEM,,Judy Chu,168977,67.4
+2016,0627,United States Representative District 27,REP,,Jack Orswell,81655,32.6
+2016,0628,United States Representative District 28,DEM,,Adam B. Schiff,210883,78.0
+2016,0628,United States Representative District 28,REP,,Lenore Solis,59526,22.0
+2016,0629,United States Representative District 29,DEM,,Tony Cardenas,128407,74.7
+2016,0629,United States Representative District 29,DEM,,Richard Alarcon,43417,25.3
+2016,0630,United States Representative District 30,DEM,,Brad Sherman,205279,72.6
+2016,0630,United States Representative District 30,REP,,Mark Reed,77325,27.4
+2016,0631,United States Representative District 31,DEM,,Pete Aguilar,121070,56.1
+2016,0631,United States Representative District 31,REP,,Paul Chabot,94866,43.9
+2016,0632,United States Representative District 32,DEM,,Grace F. Napolitano,114926,61.6
+2016,0632,United States Representative District 32,DEM,,Roger Hernández,71720,38.4
+2016,0633,United States Representative District 33,DEM,,Ted W. Lieu,219397,66.4
+2016,0633,United States Representative District 33,REP,,Kenneth W. Wright,110822,33.6
+2016,0634,United States Representative District 34,DEM,,Xavier Becerra,122842,77.2
+2016,0634,United States Representative District 34,DEM,,Adrienne Nicole Edwards,36314,22.8
+2016,0635,United States Representative District 35,DEM,,Norma J. Torres,124044,72.4
+2016,0635,United States Representative District 35,REP,,Tyler Fischella,47309,27.6
+2016,0649,United States Representative District 49,REP,,Darrell Issa,155888,50.3
+2016,0649,United States Representative District 49,DEM,,Doug Applegate,154267,49.7
+2016,0650,United States Representative District 50,REP,,Duncan Hunter,179937,63.5
+2016,0650,United States Representative District 50,DEM,,Patrick Malloy,103646,36.5
+2016,0651,United States Representative District 51,DEM,,Juan Vargas,145162,72.8
+2016,0651,United States Representative District 51,REP,,Juan M. Hidalgo Jr.,54362,27.2
+2016,0652,United States Representative District 52,DEM,,Scott Peters,181253,56.5
+2016,0652,United States Representative District 52,REP,,Denise Gitsham,139403,43.5
+2016,0653,United States Representative District 53,DEM,,Susan A. Davis,198988,67.0
+2016,0653,United States Representative District 53,REP,,James Veltmeyer,97968,33.0
+2016,0610,United States Representative District 10,REP,,Jeff Denham,124671,51.7
+2016,0610,United States Representative District 10,DEM,,Michael Eggman,116470,48.3
+2016,0611,United States Representative District 11,DEM,,Mark DeSaulnier,214868,72.1
+2016,0611,United States Representative District 11,REP,,Roger Allen Petersen,83341,27.9
+2016,0612,United States Representative District 12,DEM,,Nancy Pelosi,274035,80.9
+2016,0612,United States Representative District 12,NPP,,Preston Picus,64810,19.1
+2016,0613,United States Representative District 13,DEM,,Barbara Lee,293117,90.8
+2016,0613,United States Representative District 13,REP,,Sue Caro,29754,9.2
+2016,0614,United States Representative District 14,DEM,,Jackie Speier,231630,80.9
+2016,0614,United States Representative District 14,REP,,Angel Cardenas,54817,19.1
+2016,0615,United States Representative District 15,DEM,,Eric Swalwell,198578,73.8
+2016,0615,United States Representative District 15,REP,,Danny R. Turner,70619,26.2
+2016,0616,United States Representative District 16,DEM,,Jim Costa,97473,58.0
+2016,0616,United States Representative District 16,REP,,Johnny M. Tacherra,70483,42.0
+2016,0617,United States Representative District 17,DEM,,Ro Khanna,142268,61.0
+2016,0617,United States Representative District 17,DEM,,Mike Honda,90924,39.0
+2016,0618,United States Representative District 18,DEM,,Anna G. Eshoo,230460,71.1
+2016,0618,United States Representative District 18,REP,,Richard B. Fox,93470,28.9
+2016,0619,United States Representative District 19,DEM,,Zoe Lofgren,181802,73.9
+2016,0619,United States Representative District 19,REP,,G. Burt Lancaster,64061,26.1
+2016,0620,United States Representative District 20,DEM,,Jimmy Panetta,180980,70.8
+2016,0620,United States Representative District 20,REP,,Casey Lucius,74811,29.2
+2016,0621,United States Representative District 21,REP,,David Valadao,75126,56.7
+2016,0621,United States Representative District 21,DEM,,Emilio Huerta,57282,43.3
+2016,0622,United States Representative District 22,REP,,Devin G. Nunes,158755,67.6
+2016,0622,United States Representative District 22,DEM,,Louie J. Campos,76211,32.4
+2016,0636,United States Representative District 36,DEM,,Raul Ruiz,144348,62.1
+2016,0636,United States Representative District 36,REP,,Jeff Stone,88269,37.9
+2016,0637,United States Representative District 37,DEM,,Karen Bass,192490,81.1
+2016,0637,United States Representative District 37,DEM,,Chris Blake Wiggins,44782,18.9
+2016,0638,United States Representative District 38,DEM,,Linda T. Sánchez,163590,70.5
+2016,0638,United States Representative District 38,REP,,Ryan Downing,68524,29.5
+2016,0639,United States Representative District 39,REP,,Ed Royce,150777,57.2
+2016,0639,United States Representative District 39,DEM,,Brett Murdock,112679,42.8
+2016,0640,United States Representative District 40,DEM,,Lucille Roybal-Allard,106554,71.4
+2016,0640,United States Representative District 40,NPP,,Roman Gabriel Gonzalez,42743,28.6
+2016,0641,United States Representative District 41,DEM,,Mark Takano,128164,65.0
+2016,0641,United States Representative District 41,REP,,Doug Shepherd,69159,35.0
+2016,0642,United States Representative District 42,REP,,Ken Calvert,149547,58.8
+2016,0642,United States Representative District 42,DEM,,Tim Sheridan,104689,41.2
+2016,0643,United States Representative District 43,DEM,,Maxine Waters,167017,76.1
+2016,0643,United States Representative District 43,REP,,Omar Navarro,52499,23.9
+2016,0644,United States Representative District 44,DEM,,Nanette Diaz Barragán,93124,52.2
+2016,0644,United States Representative District 44,"III, DEM",,Isadore Hall,85289,47.8
+2016,0645,United States Representative District 45,REP,,Mimi Walters,182618,58.6
+2016,0645,United States Representative District 45,DEM,,Ron Varasteh,129231,41.4
+2016,0646,United States Representative District 46,DEM,,Lou Correa,115248,70.0
+2016,0646,United States Representative District 46,DEM,,Bao Nguyen,49345,30.0
+2016,0647,United States Representative District 47,DEM,,Alan Lowenthal,154759,63.7
+2016,0647,United States Representative District 47,REP,,Andy Whallon,88109,36.3
+2016,0648,United States Representative District 48,REP,,Dana Rohrabacher,178701,58.3
+2016,0648,United States Representative District 48,DEM,,Suzanne Savary,127715,41.7

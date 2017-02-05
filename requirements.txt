@@ -1,1 +1,2 @@
 beautifulsoup4==4.5.3
+xlrd==1.0.0
