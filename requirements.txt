@@ -1,4 +1,4 @@
 beautifulsoup4==4.5.3
 xlrd==1.0.0
 GDAL==1.11.2
-https://github.com/TileStache/TileStache/archive/fba6877c415.zip
+https://github.com/TileStache/TileStache/archive/00db3e2e51fc.zip
