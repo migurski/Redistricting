@@ -1,0 +1,43 @@
+import: https://mapzen.com/carto/refill-style/6/refill-style.yaml
+
+sources:
+    _smooshed:
+        type: GeoJSON
+        url: "http://s3.amazonaws.com/district-tiles/1/smooshed/{z}/{x}/{y}.geojson.gz"
+        max_zoom: 10
+    _borders:
+        type: GeoJSON
+        url: "http://s3.amazonaws.com/district-tiles/1/bordered/{z}/{x}/{y}.geojson.gz"
+        max_zoom: 10
+
+styles:
+    _alpha_polygons:
+        base: polygons
+        blend: overlay
+    _alpha_lines:
+        base: lines
+        blend: overlay
+
+layers:
+    _smooshed:
+        data: { source: _smooshed }
+        draw:
+            _alpha_polygons:
+                color: rgba(255, 255, 255, .3)
+                interactive: true
+    _borders:
+        data: { source: _borders }
+        draw:
+            _alpha_lines:
+                color: |
+                    function() {
+                        return (
+                            '#'
+                            + ((feature.slduborder == 1) ? '00' : 'ee')
+                            + ((feature.uscdborder == 1) ? '00' : 'cc')
+                            + ((feature.sldlborder == 1) ? '00' : 'ff')
+                            );
+                    }
+                width: 5px
+                join: round
+                cap: round
