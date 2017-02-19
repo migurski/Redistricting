@@ -8,7 +8,7 @@ import itertools
 
 parser = argparse.ArgumentParser(description='Round-robin some file lines.')
 
-parser.add_argument('-n', '--count', dest='count', default=10,
+parser.add_argument('-n', '--count', dest='count', type=int, default=10,
                     help='number of output files')
 
 parser.add_argument('input',
