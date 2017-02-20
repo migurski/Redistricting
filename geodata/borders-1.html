@@ -44,16 +44,22 @@
     <div id="map"></div>
     <div id="about" class="leaflet-bar leaflet-control">
         <h1>What Three Districts</h1>
-        <p>Blah blah blah</p>
-        <ol>
-            <li>Blah</li>
-            <li>Blah</li>
-            <li>Blah</li>
-        </ol>
-        <p>Blah blah blah</p>
+        <p>
+            Most people in the United States live in three overlapping
+            legislative districts: one for U.S. Congress, another for state
+            senate, and a third for the state assembly. This map shows the
+            sometimes-confusing patchwork quilt created by your state’s
+            redistricting commission.
+        </p>
+        <p>
+            Find your home or click on any point to see what three districts
+            you’re in for 2016, according to the U.S. Census.
+        </p>
     </div>
     <script src="https://s3.amazonaws.com/district-tiles/1/names.js.gz" lang="javascript"></script>
     <script>
+    
+        var mapzen_key = 'mapzen-w4vD8KG';
     
         function onLoaded(event)
         {
@@ -65,10 +71,16 @@
             if(!selection || !selection.feature || !selection.feature.layers) return;
             if(selection.feature.layers.indexOf('_smooshed') === -1) return;
             
-            var state_fips = selection.feature.properties.uscd_geoid.substr(0, 2),
-                uscd_geoid = selection.feature.properties.uscd_geoid,
+            var uscd_geoid = selection.feature.properties.uscd_geoid,
                 sldu_geoid = selection.feature.properties.sldu_geoid,
-                sldl_geoid = selection.feature.properties.sldl_geoid,
+                sldl_geoid = selection.feature.properties.sldl_geoid;
+            
+            openPopup(uscd_geoid, sldu_geoid, sldl_geoid, selection.leaflet_event.latlng);
+        }
+        
+        function openPopup(uscd_geoid, sldu_geoid, sldl_geoid, latlng)
+        {
+            var state_fips = uscd_geoid.substr(0, 2),
                 state_name = us_state[state_fips],
                 uscd_name = us_cd115[uscd_geoid],
                 sldu_name = all_sldu[sldu_geoid],
@@ -92,31 +104,74 @@
                     </ul>';
             }
             
-            map.openPopup(html,
-                          selection.leaflet_event.latlng,
-                          {});
-
-            console.log(selection.feature.properties);
+            map.openPopup(html, latlng);
+            updatePopupHash(uscd_geoid, sldu_geoid, sldl_geoid, latlng);
         }
-    
-        var map = L.Mapzen.map('map',
+        
+        function parseHashToObj(rawHash)
+        {
+            var dObj = {};
+            
+            if (rawHash.length === 0 || !rawHash) return dObj;
+            
+            var hashVal = rawHash.replace('#', ''),
+                valArrs = hashVal.split('&');
+
+            for (var val in valArrs)
             {
-                apiKey: 'mapzen-w4vD8KG',
-                tangramOptions: 
-                {
-                    debug: true,
-                    scene: 'borders-1.yaml' // "https://mapzen.com/carto/bubble-wrap-style-more-labels/6/bubble-wrap-style-more-labels.zip"
+                var keyAndValue = valArrs[val].split('=');
+                dObj[keyAndValue[0]] = keyAndValue[1];
+            }
+            
+            console.log(dObj);
+            
+            return dObj;
+        }
+        
+        function formatToHash(dObj)
+        {
+            var str = [];
+
+            for (var p in dObj)
+            {
+                // Nulls or undefined is just empty string
+                if (dObj[p] === null || typeof dObj[p] === 'undefined') {
+                    dObj[p] = '';
+                }
+                if (dObj.hasOwnProperty(p)) {
+                    str.push(encodeURIComponent(p) + '=' + encodeURIComponent(dObj[p]));
                 }
             }
-            );
+
+            console.log(str.join('&'));
+            
+            return str.join('&');
+        }
+        
+        function updatePopupHash(uscd_geoid, sldu_geoid, sldl_geoid, latlng)
+        {
+            var obj = parseHashToObj(window.location.hash);
+            
+            obj['uscd'] = uscd_geoid;
+            obj['sldu'] = sldu_geoid;
+            obj['sldl'] = sldl_geoid;
+            obj['latp'] = latlng ? latlng.lat.toFixed(5) : undefined;
+            obj['lonp'] = latlng ? latlng.lng.toFixed(5) : undefined;
+            
+            window.location.hash = formatToHash(obj);
+        }
+    
+        // Prepare a fresh map
+        var map = L.Mapzen.map('map', { apiKey: mapzen_key, tangramOptions: { scene: 'borders-1.yaml' } });
 
         // Set the center of the map to be the San Francisco Bay Area at zoom level 10
         map.setView([37.7749, -122.4194], 10);
 
         // Set up interactivity
         map.on('tangramloaded', onLoaded);
+        map.on('popupclose', function() { updatePopupHash(undefined, undefined, undefined, undefined) });
         
-        // Move About box into the map
+        // Move the About box into the map
         var About = L.Control.extend({
             options: { position: 'topleft' },
             onAdd: function(map) { return L.DomUtil.get('about') }
@@ -125,8 +180,20 @@
         map.addControl(new About());
         
         // Add search box
-        var geocoder = L.Mapzen.geocoder('mapzen-w4vD8KG', { position: 'topright' });
+        var geocoder = L.Mapzen.geocoder(mapzen_key, { position: 'topright' });
         geocoder.addTo(map);
+        
+        // Show the popup, if required by location hash
+        var hashObj = parseHashToObj(window.location.hash);
+        
+        if(hashObj.latp && hashObj.lonp)
+        {
+            var latlng = L.latLng(hashObj.latp, hashObj.lonp);
+            openPopup(hashObj.uscd, hashObj.sldu, hashObj.sldl, latlng);
+        }
+        
+        // Add URL hash
+        L.Mapzen.hash({ map: map });
         
     </script>
 </body>
