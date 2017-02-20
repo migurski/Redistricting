@@ -3,11 +3,11 @@ import: https://mapzen.com/carto/refill-style/6/refill-style.yaml
 sources:
     _smooshed:
         type: GeoJSON
-        url: "http://s3.amazonaws.com/district-tiles/1/smooshed/{z}/{x}/{y}.geojson.gz"
+        url: "https://s3.amazonaws.com/district-tiles/1/smooshed/{z}/{x}/{y}.geojson.gz"
         max_zoom: 12
     _borders:
         type: GeoJSON
-        url: "http://s3.amazonaws.com/district-tiles/1/bordered/{z}/{x}/{y}.geojson.gz"
+        url: "https://s3.amazonaws.com/district-tiles/1/bordered/{z}/{x}/{y}.geojson.gz"
         max_zoom: 12
 
 styles:
