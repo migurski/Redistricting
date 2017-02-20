@@ -4,11 +4,11 @@ sources:
     _smooshed:
         type: GeoJSON
         url: "http://s3.amazonaws.com/district-tiles/1/smooshed/{z}/{x}/{y}.geojson.gz"
-        max_zoom: 10
+        max_zoom: 12
     _borders:
         type: GeoJSON
         url: "http://s3.amazonaws.com/district-tiles/1/bordered/{z}/{x}/{y}.geojson.gz"
-        max_zoom: 10
+        max_zoom: 12
 
 styles:
     _alpha_polygons:
@@ -23,21 +23,49 @@ layers:
         data: { source: _smooshed }
         draw:
             _alpha_polygons:
-                color: rgba(255, 255, 255, .3)
+                order: global.sdk_order_over_everything_but_text_0
+                color: |
+                    function() {
+                        // Adapted from
+                        // http://soliton.vm.bytemark.co.uk/pub/cpt-city/cb/qual/tn/Set1_06.png.index.html
+                        return [
+                            'rgba(228,26,28, .35)',
+                            'rgba(55,126,184, .35)',
+                            'rgba(77,175,74, .35)',
+                            'rgba(255,127,0, .35)',
+                            'rgba(152,78,163, .35)',
+                            'rgba(255,255,51, .35)'
+                            ][feature.color_id];
+                    }
+                # color: |
+                #     function() {
+                #         // http://soliton.vm.bytemark.co.uk/pub/cpt-city/cb/qual/tn/Pastel1_06.png.index.html
+                #         return [
+                #             'rgb(251,180,174)',
+                #             'rgb(179,205,227)',
+                #             'rgb(204,235,197)',
+                #             'rgb(222,203,228)',
+                #             'rgb(254,217,166)',
+                #             'rgb(255,255,204)'
+                #             ][feature.color_id];
+                #     }
                 interactive: true
     _borders:
         data: { source: _borders }
         draw:
             _alpha_lines:
-                color: |
-                    function() {
-                        return (
-                            '#'
-                            + ((feature.slduborder == 1) ? '00' : 'ee')
-                            + ((feature.uscdborder == 1) ? '00' : 'cc')
-                            + ((feature.sldlborder == 1) ? '00' : 'ff')
-                            );
-                    }
-                width: 5px
+                order: global.sdk_order_over_everything_but_text_9
+                color: rgba(128, 128, 128, .50)
+                width: 2px
+                # color: |
+                #     function() {
+                #         return (
+                #             '#'
+                #             + ((feature.slduborder == 1) ? '00' : 'ee')
+                #             + ((feature.uscdborder == 1) ? '00' : 'cc')
+                #             + ((feature.sldlborder == 1) ? '00' : 'ff')
+                #             );
+                #     }
+                # width: 5px
                 join: round
                 cap: round
