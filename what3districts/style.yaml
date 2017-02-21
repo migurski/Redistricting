@@ -23,7 +23,7 @@ layers:
         data: { source: _smooshed }
         draw:
             _alpha_polygons:
-                order: global.sdk_order_over_everything_but_text_0
+                order: global.sdk_order_over_everything_but_text_9
                 color: |
                     function() {
                         // Adapted from
@@ -54,9 +54,9 @@ layers:
         data: { source: _borders }
         draw:
             _alpha_lines:
-                order: global.sdk_order_over_everything_but_text_9
-                color: rgba(128, 128, 128, .50)
-                width: 2px
+                order: global.sdk_order_over_everything_but_text_0
+                color: '#ff0000'
+                width: 8px
                 # color: |
                 #     function() {
                 #         return (
