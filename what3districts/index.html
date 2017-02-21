@@ -66,14 +66,15 @@
             <button onclick="map.setView([41.8340,  -87.7319], 11); return false">Chicago</button>
         </p>
         <p>
-            <a href="http://mike.teczno.com/notes/redistricting.html">Map by Michal Migurski</a>
+            <a href="http://mike.teczno.com/notes/redistricting.html">Words by Michal Migurski</a>
+            / <a href="https://github.com/migurski/Redistricting/tree/master/what3districts">Code on Github</a>
         </p>
     </div>
     <script src="https://s3.amazonaws.com/district-tiles/1/names.js.gz" lang="javascript"></script>
     <script>
     
         var mapzen_key = 'mapzen-w4vD8KG';
-    
+        
         function onLoaded(event)
         {
             event.tangramLayer.setSelectionEvents({ click: onClick });
@@ -176,7 +177,7 @@
         }
     
         // Prepare a fresh map
-        var map = L.Mapzen.map('map', { apiKey: mapzen_key, tangramOptions: { scene: 'borders-1.yaml' } });
+        var map = L.Mapzen.map('map', { apiKey: mapzen_key, tangramOptions: { scene: 'style.yaml' } });
 
         // Set the center of the map to be the San Francisco Bay Area at zoom level 10
         map.setView([37.7749, -122.4194], 10);
