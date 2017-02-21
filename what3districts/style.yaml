@@ -13,7 +13,7 @@ sources:
 styles:
     _alpha_polygons:
         base: polygons
-        blend: overlay
+        blend: multiply
     _alpha_lines:
         base: lines
         blend: overlay
@@ -23,30 +23,31 @@ layers:
         data: { source: _smooshed }
         draw:
             _alpha_polygons:
-                order: global.sdk_order_over_everything_but_text_0
+                order: global.sdk_order_over_everything_but_text_1
                 color: |
                     function() {
                         // Adapted from
-                        // http://soliton.vm.bytemark.co.uk/pub/cpt-city/cb/qual/tn/Set1_06.png.index.html
+                        // http://soliton.vm.bytemark.co.uk/pub/cpt-city/cb/qual/tn/Pastel1_06.png.index.html
                         return [
-                            'rgba(228,26,28, .35)',
-                            'rgba(55,126,184, .35)',
-                            'rgba(77,175,74, .35)',
-                            'rgba(255,127,0, .35)',
-                            'rgba(152,78,163, .35)',
-                            'rgba(255,255,51, .35)'
+                            'rgb(251,180,174)',
+                            'rgb(179,205,227)',
+                            'rgb(204,235,197)',
+                            'rgb(254,217,166)',
+                            'rgb(222,203,228)',
+                            'rgb(255,255,204)'
                             ][feature.color_id];
                     }
                 # color: |
                 #     function() {
-                #         // http://soliton.vm.bytemark.co.uk/pub/cpt-city/cb/qual/tn/Pastel1_06.png.index.html
+                #         // Adapted from
+                #         // http://soliton.vm.bytemark.co.uk/pub/cpt-city/cb/qual/tn/Set1_06.png.index.html
                 #         return [
-                #             'rgb(251,180,174)',
-                #             'rgb(179,205,227)',
-                #             'rgb(204,235,197)',
-                #             'rgb(222,203,228)',
-                #             'rgb(254,217,166)',
-                #             'rgb(255,255,204)'
+                #             'rgba(228,26,28, .35)',
+                #             'rgba(55,126,184, .35)',
+                #             'rgba(77,175,74, .35)',
+                #             'rgba(255,127,0, .35)',
+                #             'rgba(152,78,163, .35)',
+                #             'rgba(255,255,51, .35)'
                 #             ][feature.color_id];
                 #     }
                 interactive: true
@@ -54,18 +55,8 @@ layers:
         data: { source: _borders }
         draw:
             _alpha_lines:
-                order: global.sdk_order_over_everything_but_text_9
-                color: rgba(128, 128, 128, .50)
+                order: global.sdk_order_over_everything_but_text_0
+                color: rgba(128,128,128, .5)
                 width: 2px
-                # color: |
-                #     function() {
-                #         return (
-                #             '#'
-                #             + ((feature.slduborder == 1) ? '00' : 'ee')
-                #             + ((feature.uscdborder == 1) ? '00' : 'cc')
-                #             + ((feature.sldlborder == 1) ? '00' : 'ff')
-                #             );
-                #     }
-                # width: 5px
                 join: round
                 cap: round
