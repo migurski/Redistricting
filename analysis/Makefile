@@ -1,3 +1,12 @@
+CA_Congress.geojson: CA_Congress.csv
+	./dissolve.py CA_Congress.csv > CA_Congress.geojson
+
+CA_Assembly.geojson: CA_Assembly.csv
+	./dissolve.py CA_Assembly.csv > CA_Assembly.geojson
+
+CA_Senate.geojson: CA_Senate.csv
+	./dissolve.py CA_Senate.csv > CA_Senate.geojson
+
 CA_Congress.csv:
 	curl -L http://bdistricting.com/2010/CA_Congress/solution.zip -o CA_Congress-solution.zip
 	unzip CA_Congress-solution.zip CA_Congress.csv
