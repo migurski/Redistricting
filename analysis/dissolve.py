@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+''' Dissolve a bdistricting.com CSV of Census block GEOIDs and district IDs.
+
+Outputs resulting GeoJSON to stdout.
+'''
 import sys, csv, osgeo.ogr, itertools, json
 
 def dissolve(geoms, depth=1):

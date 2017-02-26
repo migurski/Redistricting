@@ -1,3 +1,8 @@
+''' Find borders of smooshed districts and write them to a new shapefile.
+
+Finds linear borders between areas in smooshed.shp (see smoosh.py) to generate
+linestrings for all inter-area edges. Outputs shapefile name to stdout.
+'''
 import itertools, tempfile, sys, os
 from osgeo import ogr
 

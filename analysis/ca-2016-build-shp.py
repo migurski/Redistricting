@@ -1,3 +1,7 @@
+''' Build a single shapefile of CA 2016 red/blue election results.
+
+Outputs shapefile name to stdout.
+'''
 import glob, csv, tempfile, os, sys
 from osgeo import ogr
 

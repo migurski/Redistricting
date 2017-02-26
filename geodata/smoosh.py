@@ -1,3 +1,8 @@
+''' Smoosh three different kinds of districts together into a new shapefile.
+
+Intersects three layers of districts to generate a new quilt of district areas.
+Outputs shapefile name to stdout.
+'''
 import itertools, tempfile, os, sys
 from osgeo import ogr
 
