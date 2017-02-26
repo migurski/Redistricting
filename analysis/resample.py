@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+''' Distributes numbers from a votes shapefile to a plan shapefile.
+
+The votes come in precincts and represent real-world numbers of human votes.
+See rules for `precincts-buffered.shp` from the Makefile for details on this.
+A plan is a set of districts that might be real or imaginary. This script
+spatially distributes numeric counts from the voting precincts to the planned
+districts.
+'''
 import sys, os, tempfile
 from osgeo import ogr
 
