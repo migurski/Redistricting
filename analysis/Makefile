@@ -23,6 +23,15 @@ tl_2016_06_tabblock10.shp:
 	curl -OL https://www2.census.gov/geo/tiger/TIGER2016/TABBLOCK/tl_2016_06_tabblock10.zip
 	unzip tl_2016_06_tabblock10.zip
 
+# Because of geometry validity errors in LA Times Data Desk shape files for a few
+# counties, `precincts-buffered.shp` contains a shapefile of precincts that’s been
+# processed through PostGIS with a tiny buffer of 0.00001 degrees applied to each
+# polygon. This removes slivers, holes, and other imperfections that were
+# preventing GEOS from performing intersections.
+precincts-buffered.shp:
+	python ca-2016-build-shp.py | xargs -I___ shp2pgsql -dk -s 4326 ___ precincts | psql ca2016
+	pgsql2shp -rk -f precincts-buffered.shp ca2016 'SELECT pct16, area_km2, pres_blue, pres_red, ST_Buffer ( geom, 0.00001 ) FROM precincts'
+
 ca-2016: ca-2016/shapefiles/001-alameda.shp ca-2016/shapefiles/001-alameda.dbf ca-2016/shapefiles/001-alameda.prj ca-2016/shapefiles/001-alameda.shx \
          ca-2016/shapefiles/003-alpine.shp ca-2016/shapefiles/003-alpine.dbf ca-2016/shapefiles/003-alpine.prj ca-2016/shapefiles/003-alpine.shx \
          ca-2016/shapefiles/005-amador.shp ca-2016/shapefiles/005-amador.dbf ca-2016/shapefiles/005-amador.prj ca-2016/shapefiles/005-amador.shx \
