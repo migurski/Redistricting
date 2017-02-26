@@ -1,3 +1,14 @@
+resampled-CA_Congress.shp: precincts-buffered.shp CA_Congress.geojson
+	./resample.py precincts-buffered.shp CA_Congress.geojson | xargs ogr2ogr resampled-CA_Congress.shp
+
+resampled-CA_Assembly.shp: precincts-buffered.shp CA_Assembly.geojson
+	./resample.py precincts-buffered.shp CA_Assembly.geojson | xargs ogr2ogr resampled-CA_Assembly.shp
+
+resampled-CA_Senate.shp: precincts-buffered.shp CA_Senate.geojson
+	./resample.py precincts-buffered.shp CA_Senate.geojson | xargs ogr2ogr resampled-CA_Senate.shp
+
+# Brian Olson's bdistricting.com geometric district plans.
+
 CA_Congress.geojson: CA_Congress.csv
 	./dissolve.py CA_Congress.csv > CA_Congress.geojson
 

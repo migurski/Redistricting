@@ -101,8 +101,10 @@ def main(votes_path, plan_path):
         
         out_feature.SetGeometry(plan_feature.GetGeometryRef())
         out_lyr.CreateFeature(out_feature)
-        print('.', file=sys.stderr)
+        print('.', end='', file=sys.stderr)
     
+    print('', file=sys.stderr)
+
     # print('Skipped and included:', skipped_precincts & included_precincts, file=sys.stderr)
     # print('Skipped only:', skipped_precincts - included_precincts, file=sys.stderr)
     
