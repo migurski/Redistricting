@@ -7,6 +7,10 @@ resampled-CA_Assembly.shp: precincts-buffered.shp CA_Assembly.geojson
 resampled-CA_Senate.shp: precincts-buffered.shp CA_Senate.geojson
 	./resample.py precincts-buffered.shp CA_Senate.geojson | xargs ogr2ogr resampled-CA_Senate.shp
 
+# https://www.gnu.org/software/make/manual/html_node/Pattern-Examples.html
+resampled-%.shp: precincts-buffered.shp
+	./resample.py precincts-buffered.shp $*.shp | xargs ogr2ogr $@
+
 # Brian Olson's bdistricting.com geometric district plans.
 
 CA_Congress.geojson: CA_Congress.csv

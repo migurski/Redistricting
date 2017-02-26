@@ -48,7 +48,7 @@ def main(votes_path, plan_path):
     
     included_precincts, skipped_precincts = set(), set()
     
-    for plan_feature in plan_lyr:
+    for (index, plan_feature) in enumerate(plan_lyr):
         plan_geom = plan_feature.GetGeometryRef()
         out_feature = ogr.Feature(out_lyr.GetLayerDefn())
         
@@ -101,9 +101,7 @@ def main(votes_path, plan_path):
         
         out_feature.SetGeometry(plan_feature.GetGeometryRef())
         out_lyr.CreateFeature(out_feature)
-        print('.', end='', file=sys.stderr)
-    
-    print('', file=sys.stderr)
+        print('District', index+1, 'of', len(plan_lyr), file=sys.stderr)
 
     # print('Skipped and included:', skipped_precincts & included_precincts, file=sys.stderr)
     # print('Skipped only:', skipped_precincts - included_precincts, file=sys.stderr)
