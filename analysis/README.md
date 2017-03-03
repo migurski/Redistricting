@@ -49,6 +49,11 @@ Gaps
 Adjustments
 -----------
 
-![House Blue](adjust-blue.png)
+Based on real data for CA House districts, these are correlations for
+Presidential votes to House votes. The fits aren’t great, but they help temper
+the lopsidedness of the Clinton/Trump vote compared to a more locally-driven
+House vote.
 
-![House Red](adjust-red.png)
+<img src="adjust-blue.png" width="531" height="402">
+
+<img src="adjust-red.png" width="530" height="407">
