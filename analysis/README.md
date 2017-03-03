@@ -45,3 +45,10 @@ Gaps
     <tr><td>Rep</td><td>25</td><td>14</td><td>11</td></tr>
     <tr><td>gap</td><td></td><td>D +5.7%</td><td>D +9.8%</td></tr>
 </table>
+
+Adjustments
+-----------
+
+![House Blue](adjust-blue.png)
+
+![House Red](adjust-red.png)
