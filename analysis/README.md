@@ -54,6 +54,6 @@ Presidential votes to House votes. The fits aren’t great, but they help temper
 the lopsidedness of the Clinton/Trump vote compared to a more locally-driven
 House vote.
 
-<img src="adjust-blue.png" width="531" height="402">
+<img src="adjust-blue.png" width="525" height="390">
 
-<img src="adjust-red.png" width="530" height="407">
+<img src="adjust-red.png" width="525" height="390">
