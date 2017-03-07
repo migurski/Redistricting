@@ -1,6 +1,6 @@
 <OGRVRTDataSource>
-    <OGRVRTLayer name="polling_place_locations_2016_nov_general_xlsx_81288">
-        <SrcDataSource relativeToVRT="1">polling_place_locations_2016_nov_general_xlsx_81288.csv</SrcDataSource>
+    <OGRVRTLayer name="polling_place_locations_2016_nov_general_xlsx_81288_points">
+        <SrcDataSource relativeToVRT="1">polling_place_locations_2016_nov_general_xlsx_81288_points.csv</SrcDataSource>
         <GeometryType>wkbPoint</GeometryType>
         <LayerSRS>EPSG:4326</LayerSRS>
         <GeometryField encoding="PointFromColumns" x="Longitude" y="Latitude"/>
