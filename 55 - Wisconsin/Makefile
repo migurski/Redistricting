@@ -11,7 +11,13 @@ polling_place_locations_2016_nov_general_xlsx_81288_points.csv:
 	./prepare.py polling_place_locations_2016_nov_general_xlsx_81288.csv > $@
 
 tl_2014_55_tract-edges.txt: tl_2014_55_tract/tl_2014_55_tract.shp
-	./tract-graph.py
+	./shapefile-graph.py $< $@
 
 tl_2014_55_tract/tl_2014_55_tract.shp:
 	unzip tl_2014_55_tract.zip
+
+tl_2014_55_county-edges.txt: tl_2014_55_county/tl_2014_55_county.shp
+	./shapefile-graph.py $< $@
+
+tl_2014_55_county/tl_2014_55_county.shp:
+	unzip tl_2014_55_county.zip

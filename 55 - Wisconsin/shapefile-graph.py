@@ -18,11 +18,13 @@ def get_multilinestring(geometry):
     else:
         return None
 
-ds = ogr.Open('tl_2014_55_tract/tl_2014_55_tract.shp')
+_, shp_path, graph_path = sys.argv
+
+ds = ogr.Open(shp_path)
 tracts = list(ds.GetLayer(0))
 graph = networkx.Graph()
 
-networkx.readwrite.write_edgelist(graph, 'tl_2014_55_tract-edges.txt')
+networkx.readwrite.write_edgelist(graph, graph_path)
 
 for (tract1, tract2) in itertools.combinations(tracts, 2):
     geom1 = tract1.GetGeometryRef()
@@ -43,4 +45,4 @@ for (tract1, tract2) in itertools.combinations(tracts, 2):
           tracts.index(tract2), tract2.GetField('GEOID'),
           file=sys.stderr)
 
-networkx.readwrite.write_edgelist(graph, 'tl_2014_55_tract-edges.txt')
+networkx.readwrite.write_edgelist(graph, graph_path)
