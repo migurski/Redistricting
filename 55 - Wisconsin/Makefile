@@ -10,3 +10,8 @@ polling_place_locations_2016_nov_general_xlsx_81288_points.gpkg: polling_place_l
 polling_place_locations_2016_nov_general_xlsx_81288_points.csv:
 	./prepare.py polling_place_locations_2016_nov_general_xlsx_81288.csv > $@
 
+tl_2014_55_tract-edges.txt: tl_2014_55_tract/tl_2014_55_tract.shp
+	./tract-graph.py
+
+tl_2014_55_tract/tl_2014_55_tract.shp:
+	unzip tl_2014_55_tract.zip
