@@ -12,9 +12,11 @@ parser.add_argument('graph_path', type=str, help='Path to graph file')
 parser.add_argument('--iterations', '-n', type=int, default=1, help='Number of iterations')
 parser.add_argument('--directory', '-d', type=str, help='Output directory for district plans')
 
+parser.add_argument('--quiet', '-q', dest='verbose', action='store_false', default=True)
+
 args = parser.parse_args()
 
-def grow_graph(graph, district_count):
+def grow_graph(graph, district_count, verbose):
     '''
     '''
     start_time = time.time()
@@ -57,21 +59,24 @@ def grow_graph(graph, district_count):
             iterations[generation+1,random.choice(neighbors)] = district
     
         if generation == iterations.shape[0] - 2:
-            print('oh no', file=sys.stderr)
+            if verbose:
+                print('oh no', file=sys.stderr)
             raise ValueError('Out of room')
 
     end_time = time.time()
     district_map = iterations[-1,:]
 
-    print('done in {:.3f} seconds'.format(end_time - start_time), file=sys.stderr)
+    if verbose:
+        print('done in {:.3f} seconds'.format(end_time - start_time), file=sys.stderr)
     
     return district_map
 
 graph = networkx.readwrite.read_edgelist(args.graph_path, nodetype=int)
-print('{} nodes into {} districts'.format(len(graph.nodes()), args.district_count), file=sys.stderr)
+if args.verbose:
+    print('{} nodes into {} districts'.format(len(graph.nodes()), args.district_count), file=sys.stderr)
 
 for i in range(args.iterations):
-    district_map = grow_graph(graph, args.district_count)
+    district_map = grow_graph(graph, args.district_count, args.verbose)
     district_str = ' '.join(list(map(str, district_map)))
     
     if args.directory:
