@@ -14,14 +14,14 @@ redistrict_wisconsin: tl_2014_55_tract/tl_2014_55_tract.shp 04000US55-140-B02001
                       tl_2014_55_county/tl_2014_55_county.shp 04000US55-050-B02001.zip
 	./import-data.sh $@
 
-tl_2014_55_tract-edges.txt: tl_2014_55_tract/tl_2014_55_tract.shp
-	./shapefile-graph.py $< $@
+tl_2014_55_tract-edges.txt:
+	./shapefile-graph.py redistrict_wisconsin tl_2014_55_tract $@
 
 tl_2014_55_tract/tl_2014_55_tract.shp:
 	unzip tl_2014_55_tract.zip
 
-tl_2014_55_county-edges.txt: tl_2014_55_county/tl_2014_55_county.shp
-	./shapefile-graph.py $< $@
+tl_2014_55_county-edges.txt:
+	./shapefile-graph.py redistrict_wisconsin tl_2014_55_county $@
 
 tl_2014_55_county/tl_2014_55_county.shp:
 	unzip tl_2014_55_county.zip
