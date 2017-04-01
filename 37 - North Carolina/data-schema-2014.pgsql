@@ -59,7 +59,7 @@ votes as (
 )
 select distinct s.shape_id, v.county_name, v.precinct_id,
     -- U.S. Senate has no district
-    sum(sen_red.votes) as sen_red, sum(sen_blu.votes) as sen_blue,
+    max(sen_red.votes) as sen_red, max(sen_blu.votes) as sen_blue,
     -- Use string_agg on Congressional and State Leg. districts,
     -- because one precinct sometimes votes for different districts.
     string_agg(distinct con_any.district, ',' ORDER BY con_any.district) as con_any_districts,
