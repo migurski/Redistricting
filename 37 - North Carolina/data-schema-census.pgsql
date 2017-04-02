@@ -205,7 +205,12 @@ select
     
     -- density in people per square kilometer
     (case when T."ALAND" > 0 then "B03002001" / (T."ALAND" / 1000000)
-     else null end) as density
+     else null end) as density,
+    
+    -- land area
+    T."ALAND" / 1000000 as area_km2,
+     
+    T.geom
     
 from "tl_2016_37_tract" as T,
      "acs2015_5yr_B03002" as R, "acs2015_5yr_B01002" as A,
