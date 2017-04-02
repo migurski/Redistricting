@@ -62,11 +62,14 @@ select distinct s.shape_id, v.county_name, v.precinct_id,
     max(sen_red.votes) as sen_red, max(sen_blu.votes) as sen_blue,
     -- Use string_agg on Congressional and State Leg. districts,
     -- because one precinct sometimes votes for different districts.
-    string_agg(distinct con_any.district, ',' ORDER BY con_any.district) as con_any_districts,
+    string_agg(distinct con_any.district, ',' ORDER BY con_any.district) as con_districts,
+    'Yes' as con_contested,
     max(con_red.votes) as con_red_votes, max(con_blu.votes) as con_blue_votes,
     string_agg(distinct sldu_any.district, ',' ORDER BY sldu_any.district) as sldu_districts,
+    string_agg(distinct sldu_race.is_contested, ',') as sldu_contested,
     max(sldu_red.votes) as sldu_red_votes, max(sldu_blu.votes) as sldu_blue_votes,
     string_agg(distinct sldl_any.district, ',' ORDER BY sldl_any.district) as sldl_districts,
+    string_agg(distinct sldl_race.is_contested, ',') as sldl_contested,
     max(sldl_red.votes) as sldl_red_votes, max(sldl_blu.votes) as sldl_blue_votes
 from shapes as s
 left join votes as v
@@ -87,12 +90,16 @@ left join votes as sldu_red
   on sldu_red.county_name = v.county_name and sldu_red.precinct_id = v.precinct_id and sldu_red.office = 'sldu' and sldu_red.party = 'red'
 left join votes as sldu_blu
   on sldu_blu.county_name = v.county_name and sldu_blu.precinct_id = v.precinct_id and sldu_blu.office = 'sldu' and sldu_blu.party = 'blue'
+left join races as sldu_race
+  on sldu_race.year = '2014' and sldu_race.chamber = 'sldu' and sldu_race.district_id = sldu_any.district
 left join votes as sldl_any
   on sldl_any.county_name = v.county_name and sldl_any.precinct_id = v.precinct_id and sldl_any.office = 'sldl'
 left join votes as sldl_red
   on sldl_red.county_name = v.county_name and sldl_red.precinct_id = v.precinct_id and sldl_red.office = 'sldl' and sldl_red.party = 'red'
 left join votes as sldl_blu
   on sldl_blu.county_name = v.county_name and sldl_blu.precinct_id = v.precinct_id and sldl_blu.office = 'sldl' and sldl_blu.party = 'blue'
+left join races as sldl_race
+  on sldl_race.year = '2014' and sldl_race.chamber = 'sldl' and sldl_race.district_id = sldl_any.district
 group by s.shape_id, v.county_name, v.precinct_id
 order by v.county_name, v.precinct_id
 ;

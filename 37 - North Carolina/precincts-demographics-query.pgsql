@@ -25,8 +25,8 @@ select shape_id,
     round(sum(T.asian_pop * portion)) as asian_pop,
     round(sum(T.hispanic_pop * portion)) as hispanic_pop,
     round(sum(T.other_pop * portion)) as other_pop,
-    round(sum(T.median_age * portion)) as median_age,
-    round(sum(T.median_income * portion)) as median_income,
+    round(sum(T.median_age * T.population * portion) / sum(T.population * portion)) as median_age, -- spread out among population count
+    round(sum(T.median_income * T.population * portion) / sum(T.population * portion)) as median_income, -- spread out among population count
     round(sum(T.education_pop * portion)) as education_pop,
     round(sum(T.school_pop * portion)) as school_pop,
     round(sum(T.diploma_pop * portion)) as diploma_pop,
@@ -47,5 +47,5 @@ where T.geoid = tract_geoid
 group by shape_id
 ;
 
-select count(*), sum(population), sum(area_km2) from tract_demographics;
-select count(*), sum(population), sum(area_km2) from precinct_demographics;
+select count(*), sum(population), sum(area_km2), avg(median_age) from tract_demographics;
+select count(*), sum(population), sum(area_km2), avg(median_age) from precinct_demographics;

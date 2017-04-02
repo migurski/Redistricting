@@ -2,6 +2,7 @@ nc_complete-2014.csv: nc_votes-2014.csv
 	./export-precinct-demographics-2014.sh redistrict_nc $@
 
 nc_votes-2014.csv: SBE_PRECINCTS_20141016.zip 20141104__nc__general__precinct__raw.csv.gz
+	./import-races.sh redistrict_nc
 	./import-data-2014.sh redistrict_nc
 
 nc_votes-2012.csv: SBE_PRECINCTS_09012012.zip 20121106__nc__general__precinct__raw.csv.gz
