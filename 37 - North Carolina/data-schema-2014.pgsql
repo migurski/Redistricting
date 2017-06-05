@@ -63,7 +63,7 @@ select distinct s.shape_id, v.county_name, v.precinct_id,
     -- Use string_agg on Congressional and State Leg. districts,
     -- because one precinct sometimes votes for different districts.
     string_agg(distinct con_any.district, ',' ORDER BY con_any.district) as con_districts,
-    'Yes' as con_contested,
+    string_agg(distinct con_race.is_contested, ',') as con_contested,
     max(con_red.votes) as con_red_votes, max(con_blu.votes) as con_blue_votes,
     string_agg(distinct sldu_any.district, ',' ORDER BY sldu_any.district) as sldu_districts,
     string_agg(distinct sldu_race.is_contested, ',') as sldu_contested,
@@ -84,6 +84,8 @@ left join votes as con_red
   on con_red.county_name = v.county_name and con_red.precinct_id = v.precinct_id and con_red.office = 'congress' and con_red.party = 'red'
 left join votes as con_blu
   on con_blu.county_name = v.county_name and con_blu.precinct_id = v.precinct_id and con_blu.office = 'congress' and con_blu.party = 'blue'
+left join races as con_race
+  on con_race.year = '2014' and con_race.chamber = 'ushouse' and con_race.district_id = con_any.district
 left join votes as sldu_any
   on sldu_any.county_name = v.county_name and sldu_any.precinct_id = v.precinct_id and sldu_any.office = 'sldu'
 left join votes as sldu_red
